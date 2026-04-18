@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - GripScribe</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<nav>
+  <h2>GripScribe</h2>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="insights.html">Insights</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <h1>Your Grip Data</h1>
+
+  <div id="summary" class="card"></div>
+
+  <div class="card">
+    <canvas id="chart"></canvas>
+  </div>
+
+  <div id="insight" class="card"></div>
+
+  <button onclick="generateData()">Generate Sample Data</button>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

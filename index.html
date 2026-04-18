@@ -2,32 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Grip Strength Dashboard</title>
+  <title>GripScribe</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-<div class="app">
+<nav>
+  <h2>GripScribe</h2>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="insights.html">Insights</a>
+  </div>
+</nav>
 
-  <h1>Grip Strength</h1>
+<div class="container">
 
-  <!-- Summary Card -->
-  <div id="summary" class="card"></div>
+  <h1>GripScribe</h1>
 
-  <!-- Chart -->
+  <p class="blurb">
+    A smart pen system that tracks grip strength in real time to monitor hand health,
+    detect early decline, and support recovery.
+  </p>
+
   <div class="card">
-    <canvas id="chart"></canvas>
+    <h3>What it does</h3>
+    <p>Tracks your grip strength daily and compares it to your baseline.</p>
   </div>
 
-  <!-- Insight -->
-  <div id="insight" class="card insight"></div>
-
-  <!-- Button -->
-  <button onclick="generateData()">Generate New Data</button>
+  <div class="card">
+    <h3>Why it matters</h3>
+    <p>Grip strength decline can indicate injury, fatigue, or nerve issues.</p>
+  </div>
 
 </div>
 
-<script src="script.js"></script>
 </body>
 </html>

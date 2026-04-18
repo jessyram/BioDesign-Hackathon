@@ -11,19 +11,16 @@ const chart = new Chart(ctx, {
         label: 'Grip Strength',
         data: [],
         borderWidth: 3,
-        tension: 0.3
+        tension: 0.3,
+        borderColor: '#7b2cbf'
       },
       {
         label: 'Baseline',
         data: [],
-        borderDash: [6,6]
+        borderDash: [6,6],
+        borderColor: '#ff85c0'
       }
     ]
-  },
-  options: {
-    plugins: {
-      legend: { display: true }
-    }
   }
 });
 
@@ -51,7 +48,7 @@ function updateDashboard() {
   chart.update();
 
   updateSummary(baseline);
-  updateInsight(baseline);
+  updateInsight();
 }
 
 function updateSummary(baseline) {
@@ -86,17 +83,13 @@ function updateSummary(baseline) {
   `;
 }
 
-function updateInsight(baseline) {
+function updateInsight() {
   const today = data[data.length - 1];
   const yesterday = data[data.length - 2];
 
-  let message = "";
-
-  if (today < yesterday) {
-    message = "Your grip strength is decreasing. Consider rest or reduced strain.";
-  } else {
-    message = "Your grip strength is stable or improving.";
-  }
+  let message = today < yesterday
+    ? "Grip strength is trending downward. Consider rest or reduced strain."
+    : "Grip strength is stable or improving.";
 
   document.getElementById("insight").innerText = message;
 }
