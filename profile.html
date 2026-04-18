@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profile Setup - GripScribe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <h1>Profile Setup</h1>
+
+  <div class="card">
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="number" id="age" placeholder="Age">
+
+    <select id="gender">
+      <option value="">Gender</option>
+      <option>Female</option>
+      <option>Male</option>
+      <option>Other</option>
+    </select>
+
+    <select id="hand">
+      <option value="">Dominant Hand</option>
+      <option>Right</option>
+      <option>Left</option>
+    </select>
+
+    <select id="condition">
+      <option value="">Condition</option>
+      <option>None</option>
+      <option>Carpal Tunnel</option>
+      <option>Osteoarthritis</option>
+      <option>Injury Recovery</option>
+    </select>
+  </div>
+
+  <div class="card">
+    <h3>Baseline Test</h3>
+    <p>
+      Grip the pen as hard as possible for 3–5 seconds.  
+      This will be your Day 1 baseline.
+    </p>
+
+    <input type="number" id="baseline" placeholder="Enter value">
+  </div>
+
+  <button onclick="saveProfile()">Continue</button>
+
+</div>
+
+<script>
+function saveProfile() {
+  const profile = {
+    name: document.getElementById("name").value,
+    age: document.getElementById("age").value,
+    gender: document.getElementById("gender").value,
+    hand: document.getElementById("hand").value,
+    condition: document.getElementById("condition").value,
+    baseline: document.getElementById("baseline").value
+  };
+
+  localStorage.setItem("profile", JSON.stringify(profile));
+
+  window.location.href = "dashboard.html";
+}
+</script>
+
+</body>
+</html>

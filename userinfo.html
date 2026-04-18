@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Setup - GripScribe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <h2>GripScribe</h2>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="insights.html">Insights</a>
+    <a href="userinfo.html">Setup</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <h1>User Setup</h1>
+
+  <!-- ACCOUNT INFO -->
+  <div class="card">
+    <h3>Account Info</h3>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+  </div>
+
+  <!-- PERSONAL INFO -->
+  <div class="card">
+    <h3>Personal Information</h3>
+
+    <input type="number" id="age" placeholder="Age">
+
+    <select id="gender">
+      <option value="">Select Gender</option>
+      <option>Female</option>
+      <option>Male</option>
+      <option>Other</option>
+    </select>
+
+    <select id="condition">
+      <option value="">Medical Condition</option>
+      <option>None</option>
+      <option>Carpal Tunnel</option>
+      <option>Osteoarthritis</option>
+      <option>Injury Recovery</option>
+    </select>
+
+    <select id="hand">
+      <option value="">Dominant Hand</option>
+      <option>Right</option>
+      <option>Left</option>
+    </select>
+  </div>
+
+  <!-- BASELINE TEST -->
+  <div class="card">
+    <h3>Baseline Grip Test (Day 1)</h3>
+
+    <p class="instructions">
+      Hold the pen as you normally would when writing.<br><br>
+      Then grip it as firmly as possible for <strong>3–5 seconds</strong>.<br><br>
+      This measurement will be used as your baseline to track changes over time.
+    </p>
+
+    <input type="number" id="baseline" placeholder="Enter baseline grip value">
+  </div>
+
+  <!-- SAVE BUTTON -->
+  <button onclick="saveUser()">Save & Continue</button>
+
+</div>
+
+<!-- SCRIPT -->
+<script>
+function saveUser() {
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const age = document.getElementById("age").value;
+  const gender = document.getElementById("gender").value;
+  const condition = document.getElementById("condition").value;
+  const hand = document.getElementById("hand").value;
+  const baseline = document.getElementById("baseline").value;
+
+  // SIMPLE VALIDATION
+  if (!username || !password || !age || !gender || !condition || !hand || !baseline) {
+    alert("Please fill out all fields before continuing.");
+    return;
+  }
+
+  const user = {
+    username,
+    password,
+    age,
+    gender,
+    condition,
+    hand,
+    baseline: Number(baseline)
+  };
+
+  // SAVE TO LOCAL STORAGE
+  localStorage.setItem("userData", JSON.stringify(user));
+
+  alert("Setup complete!");
+
+  // REDIRECT TO DASHBOARD
+  window.location.href = "dashboard.html";
+}
+</script>
+
+</body>
+</html>

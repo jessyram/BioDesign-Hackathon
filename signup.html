@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up - GripScribe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>Create Account</h1>
+
+  <div class="card">
+    <input type="text" id="newUser" placeholder="Username">
+    <input type="password" id="newPass" placeholder="Password">
+  </div>
+
+  <button onclick="signup()">Sign Up</button>
+
+  <p>Already have an account? <a href="login.html">Log in</a></p>
+</div>
+
+<script>
+function signup() {
+  const user = document.getElementById("newUser").value;
+  const pass = document.getElementById("newPass").value;
+
+  if (!user || !pass) {
+    alert("Fill all fields");
+    return;
+  }
+
+  localStorage.setItem("account", JSON.stringify({ user, pass }));
+
+  alert("Account created!");
+  window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
