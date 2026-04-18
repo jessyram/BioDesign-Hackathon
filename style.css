@@ -92,3 +92,12 @@ body {
     color: #7b2cbf;
     border: 2px solid #c77dff;
   }
+
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: inherit;
+  }

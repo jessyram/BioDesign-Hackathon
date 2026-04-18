@@ -1,6 +1,7 @@
 let data = [];
+let dates = [];
 
-const user = JSON.parse(localStorage.getItem("userData"));
+const profile = JSON.parse(localStorage.getItem("profile"));
 
 const ctx = document.getElementById('chart')?.getContext('2d');
 
@@ -13,95 +14,97 @@ if (ctx) {
       labels: [],
       datasets: [
         {
-          label: 'Grip Strength',
+          label: 'Grip Strength (kg)',
           data: [],
           borderWidth: 3,
           tension: 0.3,
-          borderColor: '#7b2cbf'
+          borderColor: '#7b2cbf',
+          pointRadius: 5
         },
         {
-          label: 'Baseline',
+          label: 'Baseline (kg)',
           data: [],
           borderDash: [6,6],
           borderColor: '#ff85c0'
         }
       ]
+    },
+    options: {
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              return context.raw + " kg";
+            }
+          }
+        }
+      }
     }
   });
 }
 
 function generateData() {
-  if (!user) {
+  if (!profile) {
     alert("Please complete setup first.");
     return;
   }
 
   data = [];
+  dates = [];
 
-  let baseline = user.baseline;
+  let baseline = Number(profile.baseline);
 
-  for (let i = 0; i < 10; i++) {
-    let value = baseline - (i * 2) + Math.random() * 5;
+  const today = new Date();
+
+  // Generate last 7 days
+  for (let i = 6; i >= 0; i--) {
+    let d = new Date();
+    d.setDate(today.getDate() - i);
+
+    let value = baseline - (i * 1.5) + Math.random() * 3;
+
     data.push(Math.round(value));
+    dates.push(formatDate(d));
   }
 
   updateDashboard(baseline);
 }
 
 function updateDashboard(baseline) {
-  const labels = data.map((_, i) => "Day " + (i + 1));
-
-  chart.data.labels = labels;
+  chart.data.labels = dates;
   chart.data.datasets[0].data = data;
-  chart.data.datasets[1].data = labels.map(() => baseline);
+  chart.data.datasets[1].data = dates.map(() => baseline);
 
   chart.update();
 
   updateSummary(baseline);
   updateInsight();
-  showUserInfo();
-}
-
-function showUserInfo() {
-  if (!user) return;
-
-  const div = document.getElementById("userInfo");
-
-  div.innerHTML = `
-    <strong>${user.username}</strong><br>
-    Age: ${user.age} | ${user.gender}<br>
-    Condition: ${user.condition}<br>
-    Dominant Hand: ${user.hand}<br>
-    Baseline: ${user.baseline}
-  `;
+  updateTable();
 }
 
 function updateSummary(baseline) {
-  const today = data[data.length - 1];
-  const percent = ((today - baseline) / baseline) * 100;
+  const todayValue = data[data.length - 1];
+  const percent = ((todayValue - baseline) / baseline) * 100;
 
   const summary = document.getElementById("summary");
   summary.className = "card";
 
   let status = "";
-  let color = "";
 
   if (percent >= -10) {
     status = "Normal";
-    color = "green";
+    summary.classList.add("green");
   } else if (percent >= -25) {
     status = "Warning";
-    color = "yellow";
+    summary.classList.add("yellow");
   } else {
     status = "Critical";
-    color = "red";
+    summary.classList.add("red");
   }
 
-  summary.classList.add(color);
-
   summary.innerHTML = `
-    <h2>${today}</h2>
-    Baseline: ${baseline}<br>
+    <h2>${todayValue} kg</h2>
+    Baseline: ${baseline} kg<br>
     Change: ${percent.toFixed(1)}%<br>
     Status: ${status}
   `;
@@ -115,6 +118,29 @@ function updateInsight() {
 
   insight.innerText =
     today < yesterday
-      ? "Grip strength is declining. Consider reducing strain."
-      : "Grip strength is stable or improving.";
+      ? "Grip strength is declining this week. Consider rest or reduced strain."
+      : "Grip strength is stable or improving this week.";
+}
+
+// 📅 TABLE VIEW (daily values)
+function updateTable() {
+  const table = document.getElementById("dataTable");
+
+  let html = `<h3>Weekly Breakdown</h3><ul>`;
+
+  for (let i = 0; i < data.length; i++) {
+    html += `<li>${dates[i]}: ${data[i]} kg</li>`;
+  }
+
+  html += `</ul>`;
+
+  table.innerHTML = html;
+}
+
+// 📅 Format date
+function formatDate(date) {
+  return date.toLocaleDateString(undefined, {
+    month: 'short',
+    day: 'numeric'
+  });
 }

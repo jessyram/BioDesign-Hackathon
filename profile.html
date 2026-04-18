@@ -10,7 +10,10 @@
 
   <h1>Profile Setup</h1>
 
+  <!-- PERSONAL INFO -->
   <div class="card">
+    <h3>Personal Information</h3>
+
     <input type="text" id="name" placeholder="Full Name">
     <input type="number" id="age" placeholder="Age">
 
@@ -36,14 +39,27 @@
     </select>
   </div>
 
+  <!-- HEALTHCARE PROVIDER -->
   <div class="card">
-    <h3>Baseline Test</h3>
+    <h3>Healthcare Provider (Optional)</h3>
+
+    <input type="text" id="providerName" placeholder="Provider Name">
+    <input type="text" id="clinic" placeholder="Clinic / Hospital">
+    <input type="email" id="providerEmail" placeholder="Provider Email">
+
+    <textarea id="notes" placeholder="Notes for provider (optional)" rows="3"></textarea>
+  </div>
+
+  <!-- BASELINE TEST -->
+  <div class="card">
+    <h3>Baseline Grip Test</h3>
+
     <p>
-      Grip the pen as hard as possible for 3–5 seconds.  
-      This will be your Day 1 baseline.
+      Grip the pen as firmly as possible for <strong>3–5 seconds</strong>.
+      This measurement will be used as your baseline.
     </p>
 
-    <input type="number" id="baseline" placeholder="Enter value">
+    <input type="number" id="baseline" placeholder="Enter baseline value">
   </div>
 
   <button onclick="saveProfile()">Continue</button>
@@ -58,7 +74,14 @@ function saveProfile() {
     gender: document.getElementById("gender").value,
     hand: document.getElementById("hand").value,
     condition: document.getElementById("condition").value,
-    baseline: document.getElementById("baseline").value
+    baseline: document.getElementById("baseline").value,
+
+    provider: {
+      name: document.getElementById("providerName").value,
+      clinic: document.getElementById("clinic").value,
+      email: document.getElementById("providerEmail").value,
+      notes: document.getElementById("notes").value
+    }
   };
 
   localStorage.setItem("profile", JSON.stringify(profile));
