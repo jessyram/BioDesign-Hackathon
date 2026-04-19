@@ -9,7 +9,7 @@
 <body>
 
 <nav>
-  <h2>GripScribe</h2>
+  <h2>GripScribe 💜</h2>
   <div>
     <a href="index.html">Home</a>
     <a href="dashboard.html">Dashboard</a>
@@ -18,14 +18,22 @@
 </nav>
 
 <div class="card">
-  <h1>Your Grip Data 💜</h1>
 
+  <h1>Your Grip Data</h1>
+
+  <!-- LIVE STATUS -->
+  <div id="liveStatus">⚪ Idle</div>
+
+  <!-- VIEW TOGGLES -->
+  <button onclick="loadDaily()">Daily</button>
   <button onclick="loadWeekly()">Weekly</button>
-  <button onclick="loadDaily()">Today</button>
 
+  <!-- GRAPH -->
   <canvas id="chart"></canvas>
 
+  <!-- SUMMARY -->
   <div id="summary"></div>
+
 </div>
 
 <script src="script.js"></script>
