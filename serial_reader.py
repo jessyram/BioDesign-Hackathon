@@ -6,23 +6,40 @@ BAUD = 9600
 
 ser = serial.Serial(PORT, BAUD)
 
-print("Listening for grip sessions...")
+print("Listening for sessions...")
+
+start_time = None
 
 while True:
     try:
         data = ser.readline().decode().strip()
 
+        # 🔥 when Arduino sends final average
         if data.startswith("AVG:"):
             avg = float(data.replace("AVG:", ""))
 
-            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            end_time = datetime.now()
 
-            print(f"\nSession recorded at {timestamp}")
-            print(f"Average Grip: {avg}%\n")
+            # calculate duration
+            if start_time:
+                duration = (end_time - start_time).total_seconds()
+            else:
+                duration = 0
 
-            # save to file
-            with open("session_averages.csv", "a") as f:
-                f.write(f"{timestamp},{avg}\n")
+            timestamp = end_time.strftime("%Y-%m-%d %H:%M:%S")
+
+            print(f"{timestamp} | {avg} kg | {duration}s")
+
+            # save to CSV
+            with open("session_data.csv", "a") as f:
+                f.write(f"{timestamp},{avg},{duration}\n")
+
+            start_time = None
+
+        elif data:
+            # start session timing
+            if start_time is None:
+                start_time = datetime.now()
 
     except KeyboardInterrupt:
         print("\nStopped.")

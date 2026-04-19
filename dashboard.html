@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Dashboard - GripScribe</title>
+  <title>GripScribe Dashboard</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
 
 <nav>
@@ -13,56 +13,22 @@
   <div>
     <a href="index.html">Home</a>
     <a href="dashboard.html">Dashboard</a>
-    <a href="insights.html">Insights</a>
+    <a href="profile.html">Profile</a>
   </div>
 </nav>
 
-<div class="container">
+<div class="card">
+  <h1>Your Grip Data 💜</h1>
 
-  <h1>Dashboard</h1>
+  <button onclick="loadWeekly()">Weekly</button>
+  <button onclick="loadDaily()">Today</button>
 
-  <!-- USER INFO -->
-  <div id="userInfo" class="card"></div>
+  <canvas id="chart"></canvas>
 
-  <!-- SUMMARY -->
-  <div id="summary" class="card"></div>
-
-  <!-- GRAPH -->
-  <div class="card">
-    <canvas id="chart"></canvas>
-  </div>
-
-  <!-- INSIGHT -->
-  <div id="insight" class="card"></div>
-
-  <button onclick="generateData()">Generate Sample Data</button>
-
+  <div id="summary"></div>
 </div>
 
 <script src="script.js"></script>
-
-<script>
-// 🔐 LOGIN CHECK
-if (localStorage.getItem("loggedIn") !== "true") {
-  window.location.href = "login.html";
-}
-
-// 👤 LOAD PROFILE DATA
-const profile = JSON.parse(localStorage.getItem("profile"));
-
-if (profile) {
-  document.getElementById("userInfo").innerHTML = `
-    <strong>Welcome, ${profile.name}</strong><br>
-    Age: ${profile.age} | ${profile.gender}<br>
-    Condition: ${profile.condition}<br>
-    Dominant Hand: ${profile.hand}<br>
-    Baseline: ${profile.baseline}
-  `;
-} else {
-  document.getElementById("userInfo").innerHTML =
-    "No profile found. Please complete setup.";
-}
-</script>
 
 </body>
 </html>

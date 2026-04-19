@@ -1,103 +1,57 @@
 body {
-    margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #f3e8ff, #fde2ff);
+    background: linear-gradient(to right, #f5e6ff, #ffe6f0);
+    margin: 0;
+    padding: 0;
+    text-align: center;
   }
   
-  /* Navbar */
+  /* NAVBAR */
   nav {
+    background: #c77dff;
+    padding: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: white;
-    padding: 10px 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   }
   
   nav h2 {
-    color: #7b2cbf;
+    color: white;
+    margin: 0;
   }
   
   nav a {
+    color: white;
     margin-left: 15px;
     text-decoration: none;
-    color: #555;
-    font-weight: 500;
+    font-weight: bold;
   }
   
-  nav a:hover {
-    color: #7b2cbf;
-  }
-  
-  /* Layout */
-  .container {
-    max-width: 500px;
-    margin: auto;
-    padding: 20px;
-  }
-  
-  h1 {
-    text-align: center;
-    color: #7b2cbf;
-  }
-  
-  .blurb {
-    text-align: center;
-    color: #555;
-    margin-bottom: 20px;
-  }
-  
-  /* Cards */
+  /* CARDS */
   .card {
     background: white;
-    padding: 15px;
-    border-radius: 16px;
-    margin-bottom: 15px;
-    box-shadow: 0 6px 15px rgba(123, 44, 191, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
   }
   
-  /* Button */
+  /* BUTTONS */
   button {
-    width: 100%;
-    padding: 12px;
+    background: #ff85c0;
     border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #c77dff, #ff85c0);
-    color: white;
-    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin: 10px;
     cursor: pointer;
-  }
-
-  input, select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+    color: white;
+    font-weight: bold;
   }
   
-  .instructions {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 10px;
-  }
-
-  .hero-buttons {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .cta-btn.secondary {
-    background: white;
-    color: #7b2cbf;
-    border: 2px solid #c77dff;
-  }
-
-  textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-family: inherit;
+  /* CHART */
+  canvas {
+    max-width: 600px;
+    margin: 20px auto;
   }

@@ -1,45 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>GripScribe</title>
+  <title>GripScribe Dashboard</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
 
-<nav>
-  <h2>GripScribe</h2>
-  <div>
-    <a href="index.html">Home</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="insights.html">Insights</a>
-  </div>
-</nav>
+<h1>GripScribe Dashboard</h1>
 
-<div class="hero">
-
-  <!-- LEFT -->
-  <div class="hero-left">
-    <h1 class="title">GripScribe</h1>
-  </div>
-
-  <!-- RIGHT -->
-  <div class="hero-right">
-    <h2 class="tagline">Track your grip. Prevent the decline.</h2>
-
-    <p class="subtext">
-      A smart pen system that monitors grip strength in real time,
-      helping detect early weakness and prevent long-term damage.
-    </p>
-
-    <!-- BUTTONS -->
-    <div class="hero-buttons">
-      <a href="signup.html" class="cta-btn">Get Started</a>
-      <a href="login.html" class="cta-btn secondary">Login</a>
-    </div>
-  </div>
-
+<div>
+  <button onclick="loadWeekly()">Weekly View</button>
+  <button onclick="loadDaily()">Daily View</button>
 </div>
+
+<canvas id="chart"></canvas>
+
+<div id="summary"></div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
